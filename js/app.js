@@ -19,8 +19,10 @@
 /*---------------------------- Variables (state) ----------------------------*/
 // 1) Define the required variables used to track the state of the game
 
-let turnTracker, winner, board
+let turn, winner, board
 
+// For Player Names ability
+let playerO, playerX
 
 /*------------------------ Cached Element References ------------------------*/
 const squareEls = document.querySelectorAll('.board')
@@ -36,74 +38,69 @@ gameBoard.addEventListener('click', playerChoice)
 init()
 
 function init() {
-  turnTracker = 1
+  turn = 1
   winner = null
   board = [
     null, null, null,
     null, null, null,
     null, null, null]
+  playerX = "Player X"
+  playerO = "Player O"
   render()
 }
 
 function playerChoice(evt) {
-  console.log(evt.target)
+  console.dir(evt.target)
 
+  // let index = new RegExp('[0-9]', evt.target.id)
+  // console.log(index)
+
+  render()
 }
 
-
-function turn(evt) {
+function takeTurn(evt) {
   // is the square playable?
   // place correct icon based on choice
   // Was this a winning choice?
 
   // Render the board
-  render()
+
 }
 
-
 function render() {
-  // check win condition
-  if (winner !== null) {
-    renderWin()
-  } else {
-    squareEls.forEach(function(e) {
-      console.log(e)
+  if (winner === null) {
+    // Render Message for player's turn
+    renderMessage(`${(turn > 0 ? playerX : playerO)}'s turn`)
+
+
+    squareEls.forEach(function (e, idx) {
+      if (board[idx] === 1) {
+        e.textContent = "x"
+      } else if (board[idx] === -1) {
+        e.textContent = "o"
+      } else if (board[idx] === null) {
+        // e.textContent = " "
+      } else {
+        renderMessage(`Board square ${idx} is set to ${board[idx]}`)
+      }
     })
-    // for (let square in squareEls) {
-    //   console.log(square.textContent)
-    // }
-
-
-
-    board.forEach((square, index) => {
-      //squareEls.querySelector("#sq${index}")
-
-    });
-
+  } else {
+    renderWin()
   }
-
 }
 
 function renderWin() {
+  // FIXME
   // Display Replay button, maybe have it come after
   // h1 tic tac toe
-  console.log("There was a winner!")
+  if (winner === 0) {
+    renderMessage("It was a tie!")
+  } else {
+    renderMessage(`${(winner > 0 ? playerX : playerO)} won`)
+  }
 }
 
-
-
-
-
-// 5) Handle a player clicking a square
-
-// 6) Handle a player clicking the replay button
-
-
-
-
-
-// 3) Upon loading, the app should:
-// 	3.1) Call an initialize function to initialize the state variables
-// 	3.2) Render those values to the page
-// 	3.3) Wait for the user to click a square
-
+function renderMessage(msg) {
+  // messageEl
+  console.log(msg)
+}
