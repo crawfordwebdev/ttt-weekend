@@ -1,3 +1,18 @@
+/*  
+    General Notes
+    Player X : 1
+    Player O : -1
+
+    Change Turns
+    Turn *= -1
+
+    winner
+    Player O : -1
+    Tie : 0
+    Player X : 1
+*/  
+
+
 /*-------------------------------- Constants --------------------------------*/
 
 
@@ -5,7 +20,7 @@
 /*---------------------------- Variables (state) ----------------------------*/
 // 1) Define the required variables used to track the state of the game
 
-let turnTracker, isWinner, whoWon, boardXOs
+let turnTracker, winner, board
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -13,7 +28,7 @@ const gameboard = document.querySelector('.board')
 console.log(gameboard)
 
 /*----------------------------- Event Listeners -----------------------------*/
-gameboard.addEventListener('click', board)
+gameboard.addEventListener('click', playerChoice)
 
 
 /*-------------------------------- Functions --------------------------------*/
@@ -22,13 +37,15 @@ init()
 
 function init () {
   turnTracker = 1
-  isWinner = false;
-  whoWon = 0
-  boardXOs = []
+  winner = null
+  board = [
+    null, null, null, 
+    null, null, null, 
+    null, null, null]
   render()
 }
 
-function board (evt) {
+function playerChoice (evt) {
   console.log(evt.target)
 
 }
