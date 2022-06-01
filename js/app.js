@@ -10,11 +10,10 @@
     Player O : -1
     Tie : 0
     Player X : 1
-*/  
+*/
 
 
 /*-------------------------------- Constants --------------------------------*/
-
 
 
 /*---------------------------- Variables (state) ----------------------------*/
@@ -24,34 +23,35 @@ let turnTracker, winner, board
 
 
 /*------------------------ Cached Element References ------------------------*/
-const gameboard = document.querySelector('.board')
-console.log(gameboard)
+const squareEls = document.querySelectorAll('.board')
+const messageEl = document.querySelector('#message')
+const gameBoard = document.querySelector('.board')
 
 /*----------------------------- Event Listeners -----------------------------*/
-gameboard.addEventListener('click', playerChoice)
+gameBoard.addEventListener('click', playerChoice)
 
 
 /*-------------------------------- Functions --------------------------------*/
 
 init()
 
-function init () {
+function init() {
   turnTracker = 1
   winner = null
   board = [
-    null, null, null, 
-    null, null, null, 
+    null, null, null,
+    null, null, null,
     null, null, null]
   render()
 }
 
-function playerChoice (evt) {
+function playerChoice(evt) {
   console.log(evt.target)
 
 }
 
 
-function turn (evt) {
+function turn(evt) {
   // is the square playable?
   // place correct icon based on choice
   // Was this a winning choice?
@@ -63,9 +63,22 @@ function turn (evt) {
 
 function render() {
   // check win condition
-  if (isWinner == true) {
+  if (winner !== null) {
     renderWin()
   } else {
+    squareEls.forEach(function(e) {
+      console.log(e)
+    })
+    // for (let square in squareEls) {
+    //   console.log(square.textContent)
+    // }
+
+
+
+    board.forEach((square, index) => {
+      //squareEls.querySelector("#sq${index}")
+
+    });
 
   }
 
