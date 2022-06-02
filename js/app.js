@@ -15,6 +15,20 @@
 
 /*-------------------------------- Constants --------------------------------*/
 
+// FIXME Refactor this in after workin
+const players = {
+  '1': {
+    name: 'Player X',
+    symbol: 'x',
+    score: 0
+  },
+  '-1': {
+    name: 'Player O',
+    symbol: 'o',
+    score: 0
+  }
+};
+
 
 /*---------------------------- Variables (state) ----------------------------*/
 // 1) Define the required variables used to track the state of the game
@@ -25,7 +39,8 @@ let turn, winner, board
 let playerO, playerX
 
 /*------------------------ Cached Element References ------------------------*/
-const squareEls = document.querySelectorAll('.board')
+const squareEls = document.querySelectorAll('.square') // Selecting all the board's square's by class
+
 const messageEl = document.querySelector('#message')
 const gameBoard = document.querySelector('.board')
 
@@ -50,21 +65,20 @@ function init() {
 }
 
 function playerChoice(evt) {
-  console.dir(evt.target)
+  console.log("playerChoice triggered")
+  let idx = parseInt(evt.target.id.slice(2))
+  // is it blank?
+  if (board[idx] === null) {
+    board[idx] = turn > 0 ? 1 : -1
+    console.log(board[idx])
+    console.log(board)
 
-  // let index = new RegExp('[0-9]', evt.target.id)
-  // console.log(index)
+    // Turn over
+    turn *= -1
 
-  render()
-}
-
-function takeTurn(evt) {
-  // is the square playable?
-  // place correct icon based on choice
-  // Was this a winning choice?
-
-  // Render the board
-
+    // Only need to render when there is a change.
+    render()
+  }
 }
 
 function render() {
@@ -72,17 +86,20 @@ function render() {
     // Render Message for player's turn
     renderMessage(`${(turn > 0 ? playerX : playerO)}'s turn`)
 
-
     squareEls.forEach(function (e, idx) {
       if (board[idx] === 1) {
         e.textContent = "x"
       } else if (board[idx] === -1) {
         e.textContent = "o"
       } else if (board[idx] === null) {
-        // e.textContent = " "
+        // e.textContent = ""
+        console.log(`Null: ${console.dir(board[idx])}`)
+        console.log(`Element: ${console.dir(e)}`)
       } else {
         renderMessage(`Board square ${idx} is set to ${board[idx]}`)
       }
+      console.log(`Index: ${idx}`)
+      console.log(e)
     })
   } else {
     renderWin()
