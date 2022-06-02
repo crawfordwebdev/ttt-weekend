@@ -118,6 +118,5 @@ function renderWin() {
 }
 
 function renderMessage(msg) {
-  // messageEl
-  console.log(msg)
+  messageEl.textContent = msg
 }
