@@ -118,6 +118,7 @@ function render() {
       } else {
         renderMessage(`Board square ${idx} is set to ${board[idx]}`)
       }
+      //
       console.log(`Index: ${idx}`)
       console.log(e)
     })
@@ -141,52 +142,25 @@ function renderMessage(msg) {
   messageEl.textContent = msg
 }
 
-function checkForWinner() {
+function getWinner() {
+  // Loop through each of the winning combination arrays defined in the winningCombos array. Total up the three board positions using the three indexes in the current combo. Convert the total to an absolute value (convert any negative total to positive). If the total equals 3, we have a winner! Set the winner variable to the board's value at the index specified by the first index of that winning combination's array by returning that value.
 
-  // new array copy of board to see if one player has one and then another array to see if other has one
-  // should be able to compare this array to each in the winningCombos array to see if any match
 
-  /*  
-    General Notes
-    Player X : 1
-    Player O : -1
-
-    Change Turns
-    Turn *= -1
-
-    winner
-    Player O : -1
-    Tie : 0
-    Player X : 1
-*/
-
-  // Check if board is filled
-  if (board.every(e => e !== null)) {
-    
-
+  for (let combo of winningCombo) {
+    let comboTotal = 0
+     combo.forEach(num => {
+       comboTotal += board[num]
+       console.log(board[num])
+       console.log(comboTotal)
+     })
+     //need to return who won if any
+     if (Mathabs(comboTotal) === 3) {
+       winner = comboTotal > 0 ? 1 : -1
+       break
+     }
   }
-
-
-}
-
-function equalArrayCompare(a, b) {
-  if (a.length !== b.length) {
-    return false
-  } else  {
-    a.forEach(function(el, idx) {
-      console.log(`el: ${el}`)
-      console.log(`b[idx] ${b[idx]}`)
-      if (el != b[idx]) {
-        return false
-      }
-    })
+  // check for tie
+  if (winner === null) {
+    winner = board.every(square => square !== null) ? 0 : null
   }
-  return true
 }
-
-
-let testArray = [
-  null, null, null,
-  null, 1, null,
-  null, null, null]
-console.log(`Comparing Array: ${equalArrayCompare(testArray,board)}`)
