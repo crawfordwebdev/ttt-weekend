@@ -1,18 +1,3 @@
-/*  
-    General Notes
-    Player X : 1
-    Player O : -1
-
-    Change Turns
-    Turn *= -1
-
-    winner
-    Player O : -1
-    Tie : 0
-    Player X : 1
-*/
-
-
 /*-------------------------------- Constants --------------------------------*/
 
 // FIXME Refactor this in after workin
@@ -28,13 +13,6 @@ const players = {
     score: 0
   }
 };
-
-
-// ## Step 5 - Define the required constants
-
-// a) In a constant called `winningCombos` define the eight possible winning combinations as an array of arrays.
-
-// 🧠 Each array will contain three indices of the board that make a winner if they hold the same player value (`1` or `-1`). If you are having trouble with this step, feel free to check out the `winningCombos` array in the solution code.
 
 const winningCombos = [
   [0, 1, 2],
@@ -90,7 +68,7 @@ function playerChoice(evt) {
 
   if (board[idx] === null && winner === null) {
 
-    board[idx] = turn // not necessary > 0 ? 1 : -1
+    board[idx] = turn 
 
     winner = getWinner()
     // Turn over
@@ -113,6 +91,7 @@ function render() {
     }
   })
 
+  // Check if game ended
   if (winner === null) {
     renderMessage(`${(turn > 0 ? playerX : playerO)}'s turn`)
   } else if (winner === 0) {
