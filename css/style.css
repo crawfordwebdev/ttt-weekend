@@ -24,10 +24,6 @@ body {
   justify-content: center;
 }
 
-body {
-
-}
-
 section.board {
   display: grid;
   grid-template-rows: repeat(3, 10vmin);
