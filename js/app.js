@@ -1,19 +1,4 @@
 /*-------------------------------- Constants --------------------------------*/
-
-// FIXME Refactor this in after workin
-const players = {
-  '1': {
-    name: 'Player X',
-    symbol: 'x',
-    score: 0
-  },
-  '-1': {
-    name: 'Player O',
-    symbol: 'o',
-    score: 0
-  }
-};
-
 const winningCombos = [
   [0, 1, 2],
   [3, 4, 5],
