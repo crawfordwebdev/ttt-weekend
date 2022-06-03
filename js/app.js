@@ -11,26 +11,20 @@ const winningCombos = [
 ]
 
 /*---------------------------- Variables (state) ----------------------------*/
-// 1) Define the required variables used to track the state of the game
-
 let turn, winner, board
-
 // For Player Names ability
 let playerO, playerX
 
 /*------------------------ Cached Element References ------------------------*/
 const squareEls = document.querySelectorAll('.square') // Selecting all the board's square's by class
 console.log(typeof squareEls)
-
 const messageEl = document.querySelector('#message')
 const gameBoard = document.querySelector('.board')
-
 const resetBtnEl = document.querySelector('#reset-button')
 
 /*----------------------------- Event Listeners -----------------------------*/
 gameBoard.addEventListener('click', playerChoice)
 resetBtnEl.addEventListener('click', init)
-
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -52,13 +46,10 @@ function playerChoice(evt) {
   let idx = parseInt(evt.target.id.slice(2))
 
   if (board[idx] === null && winner === null) {
-
     board[idx] = turn 
-
     winner = getWinner()
     // Turn over
     turn *= -1
-
     // Only need to render when there is a change.
     render()
   }
